@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pontos Turísticos Cadastrados</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <a class="navbar-brand" href="/">ViajeBem</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link text-dark" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/cidade/">Cidades</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/pontoturistico/">Pontos Turísticos</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/roteiro/">Roteiro</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/avaliacao/">Avaliações</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h2 class="text-center">Conheça os Pontos Turísticos Cadastrados do ViajeBem</h2>
+        <div class="row mt-4">
+            {% for ponto in pontos_turisticos %}
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ ponto.nome }}</h5>
+                            <p class="card-text">Cidade: {{ ponto.cidade.nome }}</p>
+                            <p class="card-text">Localização: {{ ponto.localizacao }}</p>
+                            <p class="card-text">Descrição: {{ ponto.descricao }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center">Nenhum ponto turístico cadastrado.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

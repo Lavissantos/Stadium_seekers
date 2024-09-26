@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliações</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+        <a class="navbar-brand" href="/">ViajeBem</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link text-dark" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/cidade/">Cidade</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/pontoturistico/">Pontos Turísticos</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/roteiro/">Roteiro</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/avaliacao/">Avaliações</a></li>  <!-- Link para Avaliações -->
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h2>Avalie um Ponto Turístico</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="ponto_turistico">Ponto Turístico:</label>
+                <select name="ponto_turistico" id="ponto_turistico" class="form-control">
+                    {% for ponto in pontos_turisticos %}
+                        <option value="{{ ponto.id }}">{{ ponto.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="analise">Análise:</label>
+                <textarea name="analise" id="analise" class="form-control" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Enviar Avaliação</button>
+        </form>
+
+        <h3 class="mt-4">Avaliações:</h3>
+        <ul class="list-group">
+            {% for avaliacao in avaliacoes %}
+                <li class="list-group-item">
+                    <strong>{{ avaliacao.ponto_turistico.nome }}</strong>: {{ avaliacao.analise }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
